@@ -3,13 +3,17 @@ module go.infratographer.com/x
 go 1.20
 
 require (
+	entgo.io/contrib v0.4.4
+	entgo.io/ent v0.12.2
 	github.com/MicahParks/keyfunc v1.9.0
 	github.com/XSAM/otelsql v0.21.0
 	github.com/cockroachdb/cockroach-go/v2 v2.3.3
 	github.com/gin-contrib/requestid v0.0.6
 	github.com/gin-contrib/zap v0.1.0
 	github.com/gin-gonic/gin v1.9.0
+	github.com/gobeam/stringy v0.0.6
 	github.com/golang-jwt/jwt/v4 v4.5.0
+	github.com/jaevor/go-nanoid v1.3.0
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/labstack/echo-contrib v0.14.1
 	github.com/labstack/echo-jwt/v4 v4.1.0
@@ -20,6 +24,7 @@ require (
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.15.0
+	github.com/vektah/gqlparser/v2 v2.5.1
 	github.com/zsais/go-gin-prometheus v0.1.0
 	go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.40.0
 	go.opentelemetry.io/contrib/instrumentation/github.com/labstack/echo/otelecho v0.40.0
@@ -37,19 +42,35 @@ require (
 )
 
 require (
+	ariga.io/atlas v0.10.0 // indirect
+	github.com/99designs/gqlgen v0.17.5-0.20220428154617-9250f9ac1f90 // indirect
+	github.com/agext/levenshtein v1.2.1 // indirect
+	github.com/agnivade/levenshtein v1.1.1 // indirect
+	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
 	github.com/bytedance/sonic v1.8.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/go-openapi/inflect v0.19.0 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
+	github.com/google/go-cmp v0.5.9 // indirect
+	github.com/hashicorp/hcl/v2 v2.13.0 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mitchellh/go-wordwrap v0.0.0-20150314170334-ad45545899c7 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
+	github.com/vmihailenco/msgpack/v5 v5.0.0-beta.9 // indirect
+	github.com/vmihailenco/tagparser v0.1.2 // indirect
+	github.com/zclconf/go-cty v1.8.0 // indirect
 	golang.org/x/arch v0.0.0-20210923205945-b76863e36670 // indirect
+	golang.org/x/exp v0.0.0-20221230185412-738e83a70c30 // indirect
+	golang.org/x/mod v0.9.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
+	golang.org/x/tools v0.7.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
 require (
