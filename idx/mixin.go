@@ -9,6 +9,7 @@ import (
 	"github.com/vektah/gqlparser/v2/ast"
 )
 
+// AnnotationName is the value of the annotation when read during ent compilation
 const AnnotationName string = "PrefixIDPrefix"
 
 // PrimaryKeyMixin creates a Mixin that provides the primary key as a PrefixedID.
@@ -56,12 +57,13 @@ func (m Mixin) Annotations() []schema.Annotation {
 			Annotation{Prefix: m.prefix},
 			entgql.Directives(KeyDirective("id")),
 		)
-
 	}
 
 	return ans
 }
 
+// KeyDirective returns an entgql.Directive for setting the @key field on a gql
+// type
 func KeyDirective(fields string) entgql.Directive {
 	var args []*ast.Argument
 	if fields != "" {
@@ -73,5 +75,6 @@ func KeyDirective(fields string) entgql.Directive {
 			},
 		})
 	}
+
 	return entgql.NewDirective("key", args...)
 }

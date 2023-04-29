@@ -14,6 +14,8 @@ import (
 	"go.infratographer.com/x/idx"
 )
 
+// ExternalEdgeMixin defines an ent Mixin that allows you to define an Edge that
+// is external to the current system.
 type ExternalEdgeMixin struct {
 	mixin.Schema
 
@@ -21,6 +23,9 @@ type ExternalEdgeMixin struct {
 	fieldAnnotations []schema.Annotation
 }
 
+// ExternalEdgeConfig provides all the final config options used for an External
+// Edge. These are exposed via the annotation on the field for use in hooks and
+// templates.
 type ExternalEdgeConfig struct {
 	EdgeName       string
 	ConnectionName string
@@ -31,6 +36,7 @@ type ExternalEdgeConfig struct {
 	SkipGQL        bool
 }
 
+// ExternalEdgeOption provides the ability to customize the behavior of ExternalEdges
 type ExternalEdgeOption func(*ExternalEdgeMixin)
 
 // WithExternalEdgeType allows you to define the gql type of the external edge.
@@ -44,6 +50,7 @@ func WithExternalEdgeType(name string) ExternalEdgeOption {
 				stringy.New(name).CamelCase(),
 			)
 		}
+
 		m.config.EdgeName = name
 
 		if m.config.FieldName == "" {
@@ -76,6 +83,8 @@ func SkipExternalEdgeGQL(v bool) ExternalEdgeOption {
 	}
 }
 
+// WithExternalEdgeFieldAnnotations allows you to add additional annotations
+// to the resulting field used to store the ID of the external edge
 func WithExternalEdgeFieldAnnotations(a entgql.Annotation) ExternalEdgeOption {
 	return func(m *ExternalEdgeMixin) {
 		m.fieldAnnotations = append(m.fieldAnnotations, a)
@@ -90,8 +99,10 @@ func ExternalEdgeAllowAnyID(v bool) ExternalEdgeOption {
 	}
 }
 
-// ExternalEdge is an ent.Mixin that adds the fields needed for external references
-// to both the ent models as well as the generated gql schema
+// ExternalEdge returns an ent.Mixin that adds the fields needed for external edge
+// references to both the ent models as well as the generated gql schema. This
+// makes managing federated gql easier since the schema extensions for the
+// remote service types are added automatically to your schema.
 func ExternalEdge(opts ...ExternalEdgeOption) *ExternalEdgeMixin {
 	m := &ExternalEdgeMixin{config: &ExternalEdgeConfig{}}
 
@@ -102,6 +113,7 @@ func ExternalEdge(opts ...ExternalEdgeOption) *ExternalEdgeMixin {
 	return m
 }
 
+// Fields provides the id field of the ExternalEdge
 func (m ExternalEdgeMixin) Fields() []ent.Field {
 	f := field.Text(m.config.FieldName).Annotations(
 		entgql.Type("ID"),
@@ -128,6 +140,7 @@ func (m ExternalEdgeMixin) Fields() []ent.Field {
 	return []ent.Field{f}
 }
 
+// Indexes provides the index of the field representing an ExternalEdge
 func (m ExternalEdgeMixin) Indexes() []ent.Index {
 	return []ent.Index{
 		index.Fields(m.config.FieldName),

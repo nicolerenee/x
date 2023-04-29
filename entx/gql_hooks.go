@@ -8,6 +8,9 @@ import (
 	"github.com/vektah/gqlparser/v2/ast"
 )
 
+// Skipping err113 linting since these errors are returned during generation and not runtime
+//
+//nolint:goerr113
 var (
 	removeNodeGoModel = func(g *gen.Graph, s *ast.Schema) error {
 		n, ok := s.Types["Node"]
@@ -128,7 +131,7 @@ var (
 								// Now add external edge to local edge
 								localDef, ok := s.Types[n.Name]
 								if !ok {
-									return errors.New("Unable to find local edge")
+									return errors.New("unable to find local edge")
 								}
 
 								var localType *ast.Type

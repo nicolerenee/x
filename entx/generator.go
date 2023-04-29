@@ -16,6 +16,7 @@ type Extension struct {
 	gqlSchemaHooks []entgql.SchemaHook
 }
 
+// ExtensionOption allow for control over the behavior of the generator
 type ExtensionOption func(*Extension) error
 
 // WithFederation adds support for graphql federation by adding the Entity interface
@@ -24,6 +25,7 @@ func WithFederation() ExtensionOption {
 	return func(ex *Extension) error {
 		ex.templates = append(ex.templates, FederationTemplate)
 		ex.gqlSchemaHooks = append(ex.gqlSchemaHooks, removeNodeGoModel, removeNodeQueries)
+
 		return nil
 	}
 }
@@ -44,6 +46,8 @@ func WithGQLExternalEdges() ExtensionOption {
 	}
 }
 
+// NewExtension returns an entc Extension that allows the entx package to generate
+// the schema changes and templates needed to function
 func NewExtension(opts ...ExtensionOption) (*Extension, error) {
 	e := &Extension{
 		templates: MixinTemplates,

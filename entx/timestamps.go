@@ -10,10 +10,12 @@ import (
 	"entgo.io/ent/schema/mixin"
 )
 
+// TimestampsMixin defines an ent Mixin that provides created_at and updated_at timestamp fields
 type TimestampsMixin struct {
 	mixin.Schema
 }
 
+// Fields provides the created_at and updated_at fields
 func (m TimestampsMixin) Fields() []ent.Field {
 	return []ent.Field{
 		field.Time("created_at").
@@ -32,7 +34,7 @@ func (m TimestampsMixin) Fields() []ent.Field {
 	}
 }
 
-// Indexes of the Street.
+// Indexes provides indexes on both created_at and updated_at fields
 func (TimestampsMixin) Indexes() []ent.Index {
 	return []ent.Index{
 		index.Fields("created_at"),

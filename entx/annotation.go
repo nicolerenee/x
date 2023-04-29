@@ -1,5 +1,6 @@
 package entx
 
+// AnnotationName is the value of the annotation when read during ent compilation
 var AnnotationName = "I12R_ENTX"
 
 // Annotation provides a ent.Annotaion spec
