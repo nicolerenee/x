@@ -2,16 +2,23 @@ package entx
 
 import (
 	"encoding/json"
+	"errors"
+	"io"
 
 	"entgo.io/contrib/entgql"
 	"entgo.io/ent"
 	"entgo.io/ent/schema/field"
 	"entgo.io/ent/schema/mixin"
+	"github.com/99designs/gqlgen/graphql"
 )
 
 var (
 	namespaceMinLength = 5
 	namespaceMaxLength = 64
+
+	// ErrUnmarshalJSON is returned when there is an error converting the provided
+	// JSON to a json.RawMessage type
+	ErrUnmarshalJSON = errors.New("an error occurred parsing json")
 )
 
 // NamespacedDataMixin defines an ent Mixin that captures raw json associated with a namespace.
@@ -34,5 +41,31 @@ func (m NamespacedDataMixin) Fields() []ent.Field {
 				entgql.Type("JSON"),
 				Annotation{IsNamespacedDataJSONField: true},
 			),
+	}
+}
+
+// MarshalRawMessage provides a graphql.Marshaler for json.RawMessage
+func MarshalRawMessage(t json.RawMessage) graphql.Marshaler {
+	return graphql.WriterFunc(func(w io.Writer) {
+		s, _ := t.MarshalJSON()
+		_, _ = io.WriteString(w, string(s))
+	})
+}
+
+// UnmarshalRawMessage provides a graphql.Unmarshaler for json.RawMessage
+func UnmarshalRawMessage(v interface{}) (json.RawMessage, error) {
+	switch j := v.(type) {
+	case string:
+		return UnmarshalRawMessage([]byte(j))
+	case []byte:
+		return json.RawMessage(j), nil
+	default:
+		// Attempt to cast it but return an error if it fails
+		msg, ok := j.(json.RawMessage)
+		if !ok {
+			return nil, ErrUnmarshalJSON
+		}
+
+		return msg, nil
 	}
 }

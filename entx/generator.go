@@ -1,6 +1,8 @@
 package entx
 
 import (
+	"fmt"
+
 	"entgo.io/contrib/entgql"
 	"entgo.io/ent/entc"
 	"entgo.io/ent/entc/gen"
@@ -38,22 +40,13 @@ func WithJSONScalar() ExtensionOption {
 	}
 }
 
-// WithGQLExternalEdges adds any external edges to the gql schema
-func WithGQLExternalEdges() ExtensionOption {
-	return func(ex *Extension) error {
-		ex.gqlSchemaHooks = append(ex.gqlSchemaHooks, addExternalEdges)
-		return nil
-	}
-}
-
 // NewExtension returns an entc Extension that allows the entx package to generate
 // the schema changes and templates needed to function
 func NewExtension(opts ...ExtensionOption) (*Extension, error) {
 	e := &Extension{
-		templates: MixinTemplates,
+		templates:      MixinTemplates,
+		gqlSchemaHooks: []entgql.SchemaHook{},
 	}
-
-	e.gqlSchemaHooks = []entgql.SchemaHook{addExternalEdges}
 
 	for _, opt := range opts {
 		if err := opt(e); err != nil {
@@ -66,6 +59,7 @@ func NewExtension(opts ...ExtensionOption) (*Extension, error) {
 
 // Templates of the extension
 func (e *Extension) Templates() []*gen.Template {
+	fmt.Printf("Returning tempates: (%+v)\n", e.templates)
 	return e.templates
 }
 

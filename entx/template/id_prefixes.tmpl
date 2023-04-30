@@ -1,4 +1,4 @@
-{{ define "prefixedid" }}
+{{ define "id_prefixes" }}
 
 {{ $pkg := base $.Config.Package }}
 {{ template "header" $ }}
@@ -6,14 +6,16 @@
 // prefixMap maps prefixes to table names.
 var prefixMap = map[string]string{
 	{{- range $node := $.Nodes }}
-		{{- if $annotation := $node.Annotations.PrefixIDPrefix }}
-			"{{ $annotation.Prefix }}": {{ $node.Package }}.Table,
+		{{- if $annotation := $node.Annotations.I12R_ENTX }}
+			{{- if $prefixValue = $annotation.PrefixedIDPrefix }}
+				"{{ $annotation.Prefix }}": {{ $node.Package }}.Table,
+			{{- end }}
 		{{- end }}
 	{{- end }}
 }
 
 // NodeTypeFromPrefixedID maps a PrefixedID to the underlying data table.
-func NodeTypeFromPrefixedID(ctx context.Context, id idx.PrefixedID) (string, error) {
+func NodeTypeFromPrefixedID(ctx context.Context, id gidx.PrefixedID) (string, error) {
 	p := id.Prefix()
 	if p == "" {
 		return "", fmt.Errorf("prefix is missing")

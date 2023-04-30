@@ -1,4 +1,4 @@
-package idx
+package gidx
 
 import (
 	"errors"

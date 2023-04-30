@@ -1,4 +1,4 @@
-package idx
+package gidx
 
 import (
 	"database/sql"
@@ -24,9 +24,7 @@ const (
 
 // PrefixedID represents an ID that is formatted as prefix-id. PrefixedIDs are used
 // to implement the relay spec for graphql, which required all IDs to be globally
-//
-//	unique between objects and that you have the ability to resolve an object
-//
+// unique between objects and that you have the ability to resolve an object
 // with only the id. Prefixed IDs make it possible by using a 7 characters long
 // prefix with the first 4 characters representing the application the ID belongs
 // to and the next 3 characters representing the object. This makes it possible

@@ -9,7 +9,7 @@ import (
 
 var (
 	// PrefixedIDTemplate adds support for generating the methods needed to convert a prefixed ID to it's backend type
-	PrefixedIDTemplate = parseT("template/prefixedid.tmpl")
+	PrefixedIDTemplate = parseT("template/id_prefixes.tmpl")
 
 	// FederationTemplate adds support for generating the required output to support gql federation
 	FederationTemplate = parseT("template/gql_federation.tmpl")
@@ -22,7 +22,6 @@ var (
 
 	// MixinTemplates includes all templates for extending ent to support entx mixins.
 	MixinTemplates = []*gen.Template{
-		PrefixedIDTemplate,
 		NamespacedDataWhereFuncsTemplate,
 	}
 
