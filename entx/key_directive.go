@@ -5,10 +5,10 @@ import (
 	"github.com/vektah/gqlparser/v2/ast"
 )
 
-// GraphQLKeyDirective returns an entgql.Directive for setting the @key field on
+// GraphKeyDirective returns an entgql.Directive for setting the @key field on
 // a graphql type
-func GraphKeyDirective(key string) entgql.Annotation {
-	return entgql.Directives(keyDirective("id"))
+func GraphKeyDirective(fields string) entgql.Annotation {
+	return entgql.Directives(keyDirective(fields))
 }
 
 func keyDirective(fields string) entgql.Directive {

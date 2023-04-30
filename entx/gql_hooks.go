@@ -68,10 +68,4 @@ var (
 // import string mutations from entc
 var (
 	_ entc.Extension = (*Extension)(nil)
-
-	camel  = gen.Funcs["camel"].(func(string) string)
-	pascal = gen.Funcs["pascal"].(func(string) string)
-	plural = gen.Funcs["plural"].(func(string) string)
-	// singular = gen.Funcs["singular"].(func(string) string)
-	snake = gen.Funcs["snake"].(func(string) string)
 )

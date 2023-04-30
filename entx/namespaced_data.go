@@ -3,7 +3,6 @@ package entx
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 
 	"entgo.io/contrib/entgql"
@@ -55,7 +54,6 @@ func MarshalRawMessage(t json.RawMessage) graphql.Marshaler {
 
 // UnmarshalRawMessage provides a graphql.Unmarshaler for json.RawMessage
 func UnmarshalRawMessage(v interface{}) (json.RawMessage, error) {
-	fmt.Printf("t1: %T\n", v)
 	switch j := v.(type) {
 	case string:
 		return UnmarshalRawMessage([]byte(j))
@@ -66,6 +64,7 @@ func UnmarshalRawMessage(v interface{}) (json.RawMessage, error) {
 		if err != nil {
 			return nil, err
 		}
+
 		return json.RawMessage(js), nil
 	default:
 		// Attempt to cast it as a fall back but return an error if it fails
@@ -73,6 +72,7 @@ func UnmarshalRawMessage(v interface{}) (json.RawMessage, error) {
 		if err != nil {
 			return nil, err
 		}
+
 		return json.RawMessage(js), nil
 	}
 }
