@@ -5,13 +5,13 @@ go 1.20
 require (
 	entgo.io/contrib v0.4.4
 	entgo.io/ent v0.12.2
+	github.com/99designs/gqlgen v0.17.5-0.20220428154617-9250f9ac1f90
 	github.com/MicahParks/keyfunc v1.9.0
 	github.com/XSAM/otelsql v0.21.0
 	github.com/cockroachdb/cockroach-go/v2 v2.3.3
 	github.com/gin-contrib/requestid v0.0.6
 	github.com/gin-contrib/zap v0.1.0
 	github.com/gin-gonic/gin v1.9.0
-	github.com/gobeam/stringy v0.0.6
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/jaevor/go-nanoid v1.3.0
 	github.com/jmoiron/sqlx v1.3.5
@@ -43,7 +43,6 @@ require (
 
 require (
 	ariga.io/atlas v0.10.0 // indirect
-	github.com/99designs/gqlgen v0.17.5-0.20220428154617-9250f9ac1f90 // indirect
 	github.com/agext/levenshtein v1.2.1 // indirect
 	github.com/agnivade/levenshtein v1.1.1 // indirect
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
