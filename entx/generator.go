@@ -1,8 +1,6 @@
 package entx
 
 import (
-	"fmt"
-
 	"entgo.io/contrib/entgql"
 	"entgo.io/ent/entc"
 	"entgo.io/ent/entc/gen"
@@ -59,7 +57,6 @@ func NewExtension(opts ...ExtensionOption) (*Extension, error) {
 
 // Templates of the extension
 func (e *Extension) Templates() []*gen.Template {
-	fmt.Printf("Returning tempates: (%+v)\n", e.templates)
 	return e.templates
 }
 
